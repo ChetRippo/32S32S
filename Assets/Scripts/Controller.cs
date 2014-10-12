@@ -21,19 +21,15 @@ public class Controller : MonoBehaviour {
 				if(transform.localScale.x >= 0){
 					transform.localScale = new Vector3(-1 * transform.localScale.x, transform.localScale.y, transform.localScale.z);
 				}
-				GetComponent<Animator>().speed = 0.9f;
-				GetComponent<Animator>().enabled = true;
+                GetComponent<Animator>().Play("walk");
 			}else if (Input.GetKey("right")){
 	            transform.Translate(speed * Time.deltaTime, 0, 0);
 	            if(transform.localScale.x <= 0){
 					transform.localScale = new Vector3(-1 * transform.localScale.x, transform.localScale.y, transform.localScale.z);
 				}
-				GetComponent<Animator>().speed = 0.9f;
-				GetComponent<Animator>().enabled = true;
+                GetComponent<Animator>().Play("walk");
 	        }else{
-	        	GetComponent<Animator>().speed = 0f;
-	        	GetComponent<SpriteRenderer>().sprite = idleSprite;
-	        	GetComponent<Animator>().enabled = false;
+	        	GetComponent<Animator>().Play("Idle");
 	        }
 	        if(!inAir && Input.GetKeyDown("up")){
 	        	rigidbody2D.AddForce(Vector2.up * jumpHeight);
