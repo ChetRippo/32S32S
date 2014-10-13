@@ -7,6 +7,7 @@ public class TextManager : MonoBehaviour {
 	public string text = "";
 	public int textArrayIndex = 0;
 	public string[] textArray;
+	public int dir = 1;
 
 	// Use this for initialization
 	void Start () {
@@ -16,6 +17,12 @@ public class TextManager : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if(GameObject.Find("Manager").GetComponent<GlobalStateManager>().textDisplayed){
+			transform.parent.Find("GUIGUI").rotation = new Quaternion(transform.parent.Find("GUIGUI").rotation.x, transform.parent.Find("GUIGUI").rotation.y, transform.parent.Find("GUIGUI").rotation.z + 0.8f * dir * Time.deltaTime, transform.parent.Find("GUIGUI").rotation.w);
+			if(transform.parent.Find("GUIGUI").rotation.z > 0.2 && dir == 1){
+				dir = -1;
+			}else if(transform.parent.Find("GUIGUI").rotation.z < -0.2 && dir == -1){
+				dir = 1;
+			}
 			if(textIndex < text.Length){
 				textIndex++;
 			}else if(Input.GetKeyDown("space")){
