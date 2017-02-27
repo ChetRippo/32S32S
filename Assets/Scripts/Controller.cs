@@ -15,7 +15,7 @@ public class Controller : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if(!GameObject.Find("Manager").GetComponent<GlobalStateManager>().textDisplayed && transform.parent.Find("Main Camera").camera.enabled){
+		if(!GameObject.Find("Manager").GetComponent<GlobalStateManager>().textDisplayed && transform.parent.Find("Main Camera").GetComponent<Camera>().enabled){
 			if(Input.GetKey("left")){
 				transform.Translate(-speed * Time.deltaTime, 0, 0);
 				if(transform.localScale.x >= 0){
@@ -32,7 +32,7 @@ public class Controller : MonoBehaviour {
 	        	GetComponent<Animator>().Play("Idle");
 	        }
 	        if(!inAir && Input.GetKeyDown("up")){
-	        	rigidbody2D.AddForce(Vector2.up * jumpHeight);
+	        	GetComponent<Rigidbody2D>().AddForce(Vector2.up * jumpHeight);
 	        	inAir = true;
 	        }
 	    }
@@ -53,7 +53,7 @@ public class Controller : MonoBehaviour {
         	//enable connected camera
         	foreach(GameObject g in GameObject.FindGameObjectsWithTag(collider.gameObject.tag)){
         		if(g.name != "door"){
-        			g.camera.enabled = true;
+        			g.GetComponent<Camera>().enabled = true;
         		}
         	}
         }
